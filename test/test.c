@@ -1,21 +1,26 @@
-#include <stack.h>
+#include <queue.h>
 
 #include <stdio.h>
 
 int main(void)
 {
-    Stack *stack = make_stack(2);
+    Queue *queue = make_queue();
     int arr[] = {2, 4, 6, 8};
+    
+    queue_enqueue(queue, &arr[0]);
+    queue_enqueue(queue, &arr[1]);
+    queue_enqueue(queue, &arr[2]);
+    queue_enqueue(queue, &arr[3]);
 
-    stack_push(stack, &arr[0]);
-    stack_push(stack, &arr[1]);
-    stack_push(stack, &arr[2]);
-    stack_push(stack, &arr[3]);
+    printf("%d\n", *(int *)queue_dequeue(queue));
+    printf("%d\n", *(int *)queue_dequeue(queue));
+    printf("%d\n", *(int *)queue_dequeue(queue));
+    // printf("%d\n", *(int *)queue_dequeue(queue));
+    // if (queue_front(queue))
+    // printf("%d\n", *(int *)queue_dequeue(queue));
 
-    while (stack_top(stack)) {
-        printf("%d\n", *(int *)stack_pop(stack));
-    }
+    printf("%d\n", *(int *)queue_front(queue));
 
-    free_stack(stack);
+    free_queue(queue);
     return 0;
 }
