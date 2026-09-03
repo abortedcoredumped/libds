@@ -3,15 +3,18 @@
 
 #include <stdlib.h>
 
+typedef struct node Node;
+typedef struct list List;
+
 struct node {
     void *value;
-    struct node *prev;
-    struct node *next;
+    Node *prev;
+    Node *next;
 };
 
 struct list {
-    struct node *head;
-    struct node *tail;
+    Node *head;
+    Node *tail;
 
     size_t length;
 };
@@ -23,18 +26,18 @@ enum {
 };
 
 // This function returns a linked-list node
-struct node *make_node(void *value, struct node *prev, struct node *next);
+Node *make_node(void *value, Node *prev, Node *next);
 
 // Initialize a empty list
-struct list *make_list(void);
+List *make_list(void);
 
 // Free a list from its head to its tail
-int free_list(struct list *target);
+int free_list(List *target);
 
 // Push a value to a list at the end of the list
-int list_push(struct list *target, void *value);
+int list_push(List *target, void *value);
 
 // Push a value the the from the front
-int list_unshift(struct list *target, void *value);
+int list_unshift(List *target, void *value);
 
 #endif
