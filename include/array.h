@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 
+typedef struct array Array;
+
 struct array {
     void **address;
     size_t length;
@@ -24,21 +26,21 @@ enum {
 
 // Make and return an array, you should provide
 // the capacity of it
-struct array *make_array(size_t capacity);
+Array *make_array(size_t capacity);
 
 // Free the allocated memory of where an array
 // over taken
-int free_array(struct array *target);
+int free_array(Array *target);
 
 // Set a value to a given index of an array
 // Returns 0 when success
-int array_set(struct array *target, size_t index, void *value);
+int array_set(Array *target, size_t index, void *value);
 
 // Push a value at the tail of an array
 // Return value see array_set()
-int array_push(struct array *target, void *value);
+int array_push(Array *target, void *value);
 
 // Get a value from a specific index
-void *array_get(struct array *target, size_t index);
+void *array_get(Array *target, size_t index);
 
 #endif
