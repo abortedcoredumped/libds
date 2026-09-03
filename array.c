@@ -17,6 +17,8 @@ struct array *make_array(size_t capacity)
 
     result->capacity = capacity;
     result->length = 0;
+
+    return result;
 }
 
 int free_array(struct array *target)
@@ -33,7 +35,7 @@ int free_array(struct array *target)
     free(target->address);
     free(target);
 
-    target = NULL;
+    return 0;
 }
 
 int array_set(struct array *target, size_t index, void *value)
@@ -46,7 +48,7 @@ int array_set(struct array *target, size_t index, void *value)
         return ARRAY_NULL_BASE_ADR;
     }
 
-    if (index < 0 || index > target->length) {
+    if (index > target->length) {
         return ARRAY_ILLEGAL_INDEX;
     }
 
@@ -77,7 +79,7 @@ int array_set(struct array *target, size_t index, void *value)
 void *array_get(struct array *target, size_t index)
 {
     if (target == NULL || target->address == NULL ||
-        index < 0 || index >= target->capacity) {
+        index >= target->capacity) {
         return NULL;
     }
 
