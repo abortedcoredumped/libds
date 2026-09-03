@@ -53,10 +53,20 @@ int array_set(Array *target, size_t index, void *value)
     }
 
     if (target->length == target->capacity) {
+        size_t quantity;
+
+        if (target->capacity < SIZE_MAX / 3) {
+            quantity = 2 * target->capacity;
+        } else if (target->capacity < SIZE_MAX / 3 * 2) {
+            quantity = target->capacity + (target->capacity >> 1);   // 1.5x
+        } else {
+            quantity = ARRAY_CAP_PLUS + target->capacity;
+        }
+
         void **tmp = 
             realloc(
                 target->address,
-                (ARRAY_CAP_PLUS+target->capacity) * sizeof(void*)
+                quantity * sizeof(void*)
             );
         
         if (tmp == NULL) {
@@ -64,7 +74,7 @@ int array_set(Array *target, size_t index, void *value)
         }
 
         target->address = tmp;
-        target->capacity += ARRAY_CAP_PLUS;
+        target->capacity = quantity;
     }
 
     target->address[index] = value;
