@@ -1,8 +1,8 @@
 #include <array.h>
 
-struct array *make_array(size_t capacity) 
+Array *make_array(size_t capacity) 
 {
-    struct array *result = malloc(sizeof(struct array));
+    Array *result = malloc(sizeof(Array));
 
     if (result == NULL) {
         return NULL;
@@ -21,7 +21,7 @@ struct array *make_array(size_t capacity)
     return result;
 }
 
-int free_array(struct array *target)
+int free_array(Array *target)
 {
     if (target == NULL) {
         return ARRAY_NULL_POINTER;
@@ -38,7 +38,7 @@ int free_array(struct array *target)
     return 0;
 }
 
-int array_set(struct array *target, size_t index, void *value)
+int array_set(Array *target, size_t index, void *value)
 {
     if (target == NULL) {
         return ARRAY_NULL_POINTER;  
@@ -76,7 +76,7 @@ int array_set(struct array *target, size_t index, void *value)
     return 0;
 }
 
-void *array_get(struct array *target, size_t index)
+void *array_get(Array *target, size_t index)
 {
     if (target == NULL || target->address == NULL ||
         index >= target->capacity) {
@@ -86,7 +86,7 @@ void *array_get(struct array *target, size_t index)
     return target->address[index];
 }
 
-int array_push(struct array *target, void *value)
+int array_push(Array *target, void *value)
 {
     return array_set(target, target->length, value);
 }
