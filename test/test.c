@@ -1,26 +1,16 @@
-#include <queue.h>
+#include <array.h>
 
 #include <stdio.h>
 
 int main(void)
 {
-    Queue *queue = make_queue();
-    int arr[] = {2, 4, 6, 8};
+    Array *arr = make_array(2);
     
-    queue_enqueue(queue, &arr[0]);
-    queue_enqueue(queue, &arr[1]);
-    queue_enqueue(queue, &arr[2]);
-    queue_enqueue(queue, &arr[3]);
+    for (size_t i = 0; i < 10000; i++) {
+        array_push(arr, &i);
+        printf("val=%zu, len=%zu, cap=%zu\n", *(size_t*)arr->address[i],arr->length,arr->capacity);
+    }
 
-    printf("%d\n", *(int *)queue_dequeue(queue));
-    printf("%d\n", *(int *)queue_dequeue(queue));
-    printf("%d\n", *(int *)queue_dequeue(queue));
-    // printf("%d\n", *(int *)queue_dequeue(queue));
-    // if (queue_front(queue))
-    // printf("%d\n", *(int *)queue_dequeue(queue));
-
-    printf("%d\n", *(int *)queue_front(queue));
-
-    free_queue(queue);
+    free_array(arr);
     return 0;
 }
