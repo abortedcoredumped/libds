@@ -1,8 +1,8 @@
 #include <list.h>
 
-struct node *make_node(void *value, struct node *prev, struct node *next)
+Node *make_node(void *value, Node *prev, Node *next)
 {
-    struct node *result = malloc(sizeof(struct node));
+    Node *result = malloc(sizeof(Node));
 
     if (result == NULL) {
         return NULL;
@@ -15,9 +15,9 @@ struct node *make_node(void *value, struct node *prev, struct node *next)
     return result;
 }
 
-struct list *make_list(void)
+List *make_list(void)
 {
-    struct list *result = malloc(sizeof(struct list));
+    List *result = malloc(sizeof(List));
 
     if (result == NULL) {
         return NULL;
@@ -30,13 +30,13 @@ struct list *make_list(void)
     return result;
 }
 
-int list_push(struct list *target, void *value)
+int list_push(List *target, void *value)
 {
     if (target == NULL) {
         return LIST_NULL_POINTER;
     }
 
-    struct node *n = make_node(value, target->tail, NULL);
+    Node *n = make_node(value, target->tail, NULL);
 
     if (n == NULL) {
         return LIST_FAIL_ALLOC_MEM;
@@ -54,13 +54,13 @@ int list_push(struct list *target, void *value)
     return target->length;
 }
 
-int free_list(struct list *target)
+int free_list(List *target)
 {
     if (target == NULL) {
         return LIST_NULL_POINTER;
     }
 
-    struct node *cur = target->head, *next;
+    Node *cur = target->head, *next;
 
     while (cur) {
         next = cur->next;
@@ -76,7 +76,7 @@ int free_list(struct list *target)
     return 0;
 }
 
-int list_unshift(struct list *target, void *value)
+int list_unshift(List *target, void *value)
 {
     if (target == NULL) {
         return LIST_NULL_POINTER;
@@ -86,7 +86,7 @@ int list_unshift(struct list *target, void *value)
         return list_push(target, value);
     } 
 
-    struct node *n = make_node(value, NULL, target->head);
+    Node *n = make_node(value, NULL, target->head);
 
     if (n == NULL) {
         return LIST_FAIL_ALLOC_MEM;
