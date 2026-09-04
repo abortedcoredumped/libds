@@ -1,7 +1,7 @@
 CC = gcc
 INC = include
 OUT = build
-SRC = $(wildcard *.c) test/test.c
+SRC = *.c test/*.c
 
 .PHONY: test
 test:
