@@ -7,6 +7,12 @@ The `libds` is a mini data structure library. Practising programming is the only
 Compile your code using this library with the command below.
 
 ```
-cd libds      # Get in the libds directory
-gcc -I include [OPTIONS] *.c <SOURCE FILE PATH> -o build/main
+make test   # Compile with your main()
+make run    # Run build/main
+```
+
+If you want to clean the build file, run
+
+```
+make clean
 ```
